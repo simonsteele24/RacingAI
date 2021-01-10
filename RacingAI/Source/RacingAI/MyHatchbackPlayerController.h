@@ -29,6 +29,7 @@ protected:
 
 	void AddToAcceleration(float accelerationVal);
 	void AddToSteering(float steeringVal);
-	void ControlCamera(float lookUpAxis);
+	void ControlCameraX(float lookRightAxis);
+	void ControlCameraY(float lookUpAxis);
 
 };

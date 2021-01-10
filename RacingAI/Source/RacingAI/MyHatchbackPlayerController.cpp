@@ -15,7 +15,8 @@ void AMyHatchbackPlayerController::SetupInputComponent()
 
 	InputComponent->BindAxis("MoveForward", this, &AMyHatchbackPlayerController::AddToAcceleration);
 	InputComponent->BindAxis("MoveRight", this, &AMyHatchbackPlayerController::AddToSteering);
-	InputComponent->BindAxis("LookUp", this, &AMyHatchbackPlayerController::ControlCamera);
+	InputComponent->BindAxis("LookUp", this, &AMyHatchbackPlayerController::ControlCameraY);
+	InputComponent->BindAxis("LookRight", this, &AMyHatchbackPlayerController::ControlCameraX);
 }
 
 void AMyHatchbackPlayerController::AddToAcceleration(float accelerationVal) 
@@ -28,9 +29,12 @@ void AMyHatchbackPlayerController::AddToSteering(float steeringVal)
 	Car->AddToSteering(steeringVal);
 }
 
-void AMyHatchbackPlayerController::ControlCamera(float lookUpAxis) 
+void AMyHatchbackPlayerController::ControlCameraY(float lookUpAxis) 
 {
-	float lookRightAxis = InputComponent->GetAxisValue("LookRight");
+	Car->AddControllerPitchInput(lookUpAxis * -1.0f);
+}
 
-	Car->ControlCamera(lookUpAxis, lookRightAxis);
+void AMyHatchbackPlayerController::ControlCameraX(float lookRightAxis) 
+{
+	Car->AddControllerYawInput(lookRightAxis);
 }

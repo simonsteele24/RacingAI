@@ -7,7 +7,9 @@
 // Called every frame
 void AMyHatchback::Tick(float DeltaTime)
 {
-	GetMesh()->AddForce(FVector(0, 0, gravityStrength));
+	FVector directionOfGravity = GetActorUpVector();
+
+	GetMesh()->AddForce(directionOfGravity * gravityStrength);
 
 	Super::Tick(DeltaTime);
 
